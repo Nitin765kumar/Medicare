@@ -6,7 +6,7 @@ This project is designed as a **multi-page modern medical platform UI** suitable
 ---
 
 ## 🚀 Live Preview
-> (Add your GitHub Pages / Netlify link here)
+> https://nitin765kumar.github.io/Medicare/
 
 
 ---
