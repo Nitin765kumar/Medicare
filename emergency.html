@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Medical Care | 24/7 Trauma Assistance | Medicare+</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        :root {
+            --brand-navy: #1a2e40;
+            --brand-primary-accent: #0d6efd;
+            --emergency-red: #dc3545;
+            --emergency-amber: #ffc107;
+            --clinical-green: #198754;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        html, body {
+            height: auto !important;
+            overflow-x: hidden !important;
+            overflow-y: auto !important;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .text-navy-custom {
+            color: var(--brand-navy) !important;
+        }
+
+        .active-emergency-btn {
+            background-color: var(--emergency-red) !important;
+            color: #ffffff !important;
+            border: 2px solid var(--emergency-red) !important;
+            padding: 8px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .active-emergency-btn:hover {
+            background-color: #bd2130 !important;
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+        }
+
+        .emergency-hero {
+            position: relative;
+            background: linear-gradient(rgba(26, 46, 64, 0.88), rgba(17, 30, 44, 0.95)), 
+                        url('https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1200&auto=format&fit=crop') no-repeat center center;
+            background-size: cover;
+            padding: 200px 0 160px 0;
+            color: #ffffff;
+        }
+
+        .emergency-badge {
+            background-color: rgba(220, 53, 69, 0.15);
+            border: 1px solid rgba(220, 53, 69, 0.4);
+            color: #ff4d5a;
+            padding: 8px 20px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+            animation: pulse-border 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-border {
+            0% { border-color: rgba(220, 53, 69, 0.4); box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.2); }
+            50% { border-color: rgba(220, 53, 69, 0.8); box-shadow: 0 0 0 8px rgba(220, 53, 69, 0); }
+            100% { border-color: rgba(220, 53, 69, 0.4); }
+        }
+
+        .emergency-call-btn {
+            background-color: var(--emergency-red);
+            color: #ffffff !important;
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(220, 53, 69, 0.4);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .emergency-call-btn:hover {
+            background-color: #bd2130;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 24px rgba(220, 53, 69, 0.5);
+        }
+
+        .emergency-outline-btn {
+            background-color: transparent;
+            color: #ffffff !important;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            padding: 14px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .emergency-outline-btn:hover {
+            background-color: #ffffff;
+            color: var(--brand-navy) !important;
+            border-color: #ffffff;
+            transform: translateY(-3px);
+        }
+
+        .interactive-card {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05) !important;
+            border-radius: 20px;
+            background: #ffffff;
+        }
+        .interactive-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 1rem 2.5rem rgba(26, 46, 64, 0.08) !important;
+            border-color: rgba(13, 110, 253, 0.15) !important;
+        }
+
+        .emergency-icon-wrapper {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 1.6rem;
+        }
+
+        .contact-box-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 28px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+        .contact-box-card:hover {
+            border-color: rgba(0,0,0,0.08);
+            background: #fafafa;
+        }
+
+        .contact-box-card i {
+            font-size: 1.6rem;
+            padding: 14px;
+            border-radius: 14px;
+            display: inline-flex;
+        }
+
+        /* Triage Workflow Track Styling */
+        .triage-track-wrapper {
+            position: relative;
+        }
+        .triage-track-wrapper::before {
+            content: '';
+            position: absolute;
+            left: 32px;
+            top: 40px;
+            bottom: 40px;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--emergency-red), var(--brand-primary-accent), var(--clinical-green));
+            opacity: 0.3;
+        }
+        @media(max-width: 991px) {
+            .triage-track-wrapper::before {
+                left: 32px;
+            }
+        }
+        .triage-step-node {
+            position: relative;
+            display: flex;
+            gap: 24px;
+            padding-bottom: 40px;
+        }
+        .triage-step-node:last-child {
+            padding-bottom: 0;
+        }
+        .triage-step-circle {
+            width: 66px;
+            height: 66px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 3px solid var(--brand-navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--brand-navy);
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            z-index: 2;
+        }
+
+        /* Virtual Triage Module Desktop Layout */
+        .triage-btn-option {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 16px 20px;
+            width: 100%;
+            text-align: left;
+            font-weight: 600;
+            color: var(--brand-navy);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .triage-btn-option:hover {
+            border-color: var(--brand-primary-accent);
+            background-color: rgba(13, 110, 253, 0.02);
+            transform: translateX(4px);
+        }
+
+        footer {
+            background-color: #111e2c !important;
+            color: #e2e8f0 !important;
+            padding-top: 90px;
+        }
+        footer h3.footer-logo, 
+        footer h3.footer-logo span, 
+        footer h5 {
+            color: #ffffff !important;
+        }
+        footer p.footer-text, 
+        footer .text-muted {
+            color: #94a3b8 !important;
+        }
+        footer .footer-links li a {
+            color: #cbd5e1 !important;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        footer .footer-links li a:hover {
+            color: var(--brand-primary-accent) !important;
+        }
+
+        .footer-social {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+        .footer-social a {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 44px !important;
+            height: 44px !important;
+            line-height: 1 !important;
+            text-decoration: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #ffffff !important;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        .footer-social a i {
+            font-size: 1.25rem !important;
+            display: inline-block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        .footer-social a:hover {
+            background-color: var(--brand-primary-accent) !important;
+            color: #ffffff !important;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+            padding: 28px 0;
+            margin-top: 56px;
+            text-align: center;
+        }
+
+        .footer-form {
+            display: flex;
+            gap: 8px;
+            margin-top: 18px;
+        }
+        .footer-form input {
+            border: 0;
+            padding: 14px 22px;
+            border-radius: 50px;
+            flex-grow: 1;
+            outline: none;
+            font-size: 0.95rem;
+        }
+        .footer-form button {
+            border: 0;
+            background-color: var(--brand-primary-accent);
+            color: #ffffff;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease;
+            flex-shrink: 0;
+        }
+        .footer-form button:hover {
+            background-color: #0b5ed7;
+        }
+    </style>
+</head>
+
+<body style="background-color: #fcfdfe;">
+
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: var(--brand-navy); box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+    <div class="container">
+        <a class="navbar-brand text-white fw-bold fs-3" href="index.html" style="text-decoration:none;">
+            Medicare<span style="color: var(--brand-primary-accent);">+</span>
+        </a>
+
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <i class="bi bi-list text-white fs-1"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+                <li class="nav-item"><a class="nav-link text-white-50" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-white-50" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link text-white-50" href="services.html">Services</a></li>
+                <li class="nav-item"><a class="nav-link text-white-50" href="doctors.html">Doctors</a></li>
+                <li class="nav-item"><a class="nav-link text-white-50" href="appointment.html">Appointment</a></li>
+                <li class="nav-item"><a class="nav-link text-white-50" href="contact.html">Contact</a></li>
+                <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                    <a href="emergency.html" class="active-emergency-btn">Emergency</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="emergency-hero">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-10">
+                <div class="emergency-content">
+                    <div class="emergency-badge">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        <span>LEVEL-1 TRAUMA CENTER ACTIVE CLASSIFICATION</span>
+                    </div>
+
+                    <h1 class="display-3 fw-bold mb-4" style="letter-spacing: -1px; line-height: 1.15;">
+                        Highest Level Trauma Care <br><span style="color: #ff4d5a;">Seconds Save Lives.</span>
+                    </h1>
+                    
+                    <p class="lead mb-5 mx-auto opacity-90" style="max-width: 800px; font-size: 1.25rem; font-weight: 300; line-height: 1.6;">
+                        Medicare+ integrates unified medical dispatch systems, high-velocity critical trauma mechanics, and fully synchronized ICU transport corridors to stabilize acute events immediately.
+                    </p>
+
+                    <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+                        <a href="tel:+919876543210" class="emergency-call-btn">
+                            <i class="bi bi-telephone-fill animate-shake"></i>
+                            Call Instant Dispatch Unit
+                        </a>
+                        <a href="#triage-assistant" class="emergency-outline-btn">
+                            <i class="bi bi-heart-pulse me-2"></i> Assess Case Severity
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- REALTIME OPERATIONAL METRICS DASHBOARD -->
+<section class="py-4" style="margin-top: -60px; position: relative; z-index: 10;">
+    <div class="container">
+        <div class="p-4 rounded-4 shadow-lg bg-white border border-light">
+            <div class="row g-4 text-center justify-content-center align-items-center">
+                <div class="col-md-3 border-end border-light">
+                    <div class="d-flex align-items-center justify-content-center gap-3">
+                        <div style="width:12px; height:12px; background-color: var(--clinical-green); border-radius:50%; animation: pulse-border 1.5s infinite;"></div>
+                        <span class="fw-bold text-secondary text-uppercase small tracking-wider">Center Status</span>
+                    </div>
+                    <h4 class="fw-bold text-navy-custom mt-2 mb-0">Fully Operational</h4>
+                </div>
+                <div class="col-md-3 border-end border-light">
+                    <span class="fw-bold text-secondary text-uppercase small tracking-wider">Average Dispatch Response</span>
+                    <h4 class="fw-bold text-danger mt-1 mb-0" id="live-dispatch-timer">4.2 Minutes</h4>
+                </div>
+                <div class="col-md-3 border-end border-light">
+                    <span class="fw-bold text-secondary text-uppercase small tracking-wider">Active ER Surge Capacity</span>
+                    <h4 class="fw-bold text-navy-custom mt-1 mb-0" id="live-capacity-metric">84% Available</h4>
+                </div>
+                <div class="col-md-3">
+                    <span class="fw-bold text-secondary text-uppercase small tracking-wider">On-Duty Trauma Surgeons</span>
+                    <h4 class="fw-bold text-primary mt-1 mb-0">14 Active</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CORE CLINICAL CAPABILITIES -->
+<section class="py-5 mt-4">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="text-primary uppercase fw-bold tracking-wider mb-2 d-inline-block" style="font-size:0.85rem; letter-spacing: 2px;">PREMIUM EMERGENCY CAPABILITIES</span>
+            <h2 class="display-5 fw-bold text-navy-custom">World-Class Specialized Stabilization</h2>
+        </div>
+        <div class="row g-4 justify-content-center">
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="p-4 p-xl-5 shadow-sm interactive-card h-100">
+                    <div class="emergency-icon-wrapper bg-danger-subtle text-danger">
+                        <i class="bi bi-truck"></i>
+                    </div>
+                    <h4 class="fw-bold text-navy-custom mb-3">Critical Transport Fleet</h4>
+                    <p class="text-secondary mb-0 leading-relaxed">
+                        Advanced Cardiac Life Support (ACLS) transport spaces equipped with continuous biometric telemetry pipeline links directly streaming to clinicians pre-arrival.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="p-4 p-xl-5 shadow-sm interactive-card h-100">
+                    <div class="emergency-icon-wrapper bg-primary-subtle text-primary">
+                        <i class="bi bi-heart-pulse-fill"></i>
+                    </div>
+                    <h4 class="fw-bold text-navy-custom mb-3">Hyperacute Neurological & Stroke</h4>
+                    <p class="text-secondary mb-0 leading-relaxed">
+                        Rapid pathway diagnostic workflows tailored strictly for hyperacute tissue handling, immediate thrombolytic therapy, and comprehensive neural rescue mechanics.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+                <div class="p-4 p-xl-5 shadow-sm interactive-card h-100">
+                    <div class="emergency-icon-wrapper bg-success-subtle text-success">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                    </div>
+                    <h4 class="fw-bold text-navy-custom mb-3">Ultra-Precision Trauma Resus</h4>
+                    <p class="text-secondary mb-0 leading-relaxed">
+                        Multi-parameter specialized operative environments functioning 24/7/365 to stabilize complex multi-system structural damage or sudden hemodynamic failures.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- WORLD-CLASS INTERACTIVE TRIAGE DIAGNOSTIC ASSISTANT -->
+<section id="triage-assistant" class="py-5 bg-light border-top border-bottom border-light-subtle">
+    <div class="container py-3">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-5">
+                <span class="text-danger uppercase fw-bold tracking-wider mb-2 d-inline-block" style="font-size:0.85rem; letter-spacing: 1.5px;">RAPID RISK CLASSIFICATION</span>
+                <h2 class="display-6 fw-bold text-navy-custom mb-4">Interactive Virtual Triage Helper</h2>
+                <p class="text-secondary mb-4">
+                    Select the predominant clinical indicator to analyze risk category metrics, target processing workflows, and compute recommended immediate protective actions.
+                </p>
+                <div class="p-4 rounded-4 bg-white shadow-sm border border-inline">
+                    <h5 class="fw-bold text-navy-custom mb-3"><i class="bi bi-shield-fill-check text-primary me-2"></i>Clinical Standard Guardrail</h5>
+                    <p class="text-secondary small mb-0">
+                        This digital validation logic provides preliminary tracking metrics. If you are experiencing structural agony, profound respiratory loss, or heavy systemic distress, <strong>call our active emergency lines immediately without hesitation.</strong>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-lg-7">
+                <div class="p-4 p-md-5 rounded-4 bg-white shadow-lg border border-light">
+                    <div id="triage-interactive-container">
+                        <h4 class="fw-bold text-navy-custom mb-4" id="triage-step-title">Identify the Primary Medical Event Condition:</h4>
+                        
+                        <div class="d-flex flex-column gap-3" id="triage-options-panel">
+                            <button class="triage-btn-option" onclick="processTriage('critical')">
+                                <span><i class="bi bi-exclamation-octagon-fill text-danger me-3"></i>Severe Chest Pain / Acute Dyspnea</span>
+                                <i class="bi bi-chevron-right text-muted"></i>
+                            </button>
+                            <button class="triage-btn-option" onclick="processTriage('urgent')">
+                                <span><i class="bi bi-exclamation-triangle-fill text-warning me-3"></i>Sudden Weakness / Slurred Speech / Deep Lacerations</span>
+                                <i class="bi bi-chevron-right text-muted"></i>
+                            </button>
+                            <button class="triage-btn-option" onclick="processTriage('standard')">
+                                <span><i class="bi bi-info-circle-fill text-primary me-3"></i>High Pyrexia / Isolated Fractures / Persistent Vomiting</span>
+                                <i class="bi bi-chevron-right text-muted"></i>
+                            </button>
+                        </div>
+
+                        <div id="triage-result-panel" style="display:none;">
+                            <div id="triage-severity-alert" class="alert d-flex align-items-center gap-3 p-4 rounded-4 mb-4" role="alert">
+                                <i id="triage-alert-icon" class="bi fs-2"></i>
+                                <div>
+                                    <h5 class="alert-heading fw-bold mb-1" id="triage-alert-heading"></h5>
+                                    <p class="mb-0" id="triage-alert-body"></p>
+                                </div>
+                            </div>
+                            
+                            <h5 class="fw-bold text-navy-custom mb-3">Protocol Steps Executing Now:</h5>
+                            <ul class="list-group list-group-flush mb-4 text-secondary" id="triage-protocol-list">
+                                <!-- Populated dynamically -->
+                            </ul>
+
+                            <div class="d-flex gap-3">
+                                <a href="tel:+919876543210" class="btn btn-danger px-4 py-3 rounded-pill fw-bold w-100"><i class="bi bi-telephone-fill me-2"></i>Initiate Emergency Call</a>
+                                <button class="btn btn-outline-secondary px-4 py-3 rounded-pill fw-bold w-100" onclick="resetTriage()">Reset Decision Module</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- THE CLINICAL INTENSIVE TRIAGE PIPELINE (WAY OF WORK) -->
+<section class="py-5 bg-white">
+    <div class="container py-4">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <span class="text-primary uppercase fw-bold tracking-wider mb-2 d-inline-block" style="font-size:0.85rem; letter-spacing: 2px;">SYNCHRONIZED SYSTEMS</span>
+                <h2 class="display-5 fw-bold text-navy-custom mb-5">High-Speed Trauma Handling Operations Workflow</h2>
+                
+                <div class="triage-track-wrapper">
+                    
+                    <div class="triage-step-node">
+                        <div class="triage-step-circle" style="border-color: var(--emergency-red); color: var(--emergency-red);">01</div>
+                        <div>
+                            <h5 class="fw-bold text-navy-custom mb-2">Instantaneous Command Entry</h5>
+                            <p class="text-secondary mb-0">
+                                Digital call systems capture location tracking coordinates in 4.5 seconds while simultaneously spinning up localized active units.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="triage-step-node">
+                        <div class="triage-step-circle" style="border-color: var(--brand-primary-accent); color: var(--brand-primary-accent);">02</div>
+                        <div>
+                            <h5 class="fw-bold text-navy-custom mb-2">Transit Biosphere Synchronization</h5>
+                            <p class="text-secondary mb-0">
+                                En-route telemetry monitoring updates parameters to the waiting facility trauma board, avoiding room assignment structural friction.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="triage-step-node">
+                        <div class="triage-step-circle" style="border-color: var(--clinical-green); color: var(--clinical-green);">03</div>
+                        <div>
+                            <h5 class="fw-bold text-navy-custom mb-2">Zero-Wait Intake & Recovery Execution</h5>
+                            <p class="text-secondary mb-0">
+                                Direct surgical bay routing bypasses traditional registration queues completely to launch vital structural procedures immediately.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="position-relative p-3">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-5 rounded-5 transform scale-95" style="filter: blur(40px);"></div>
+                    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1200&auto=format&fit=crop" 
+                         class="img-fluid rounded-5 shadow-lg w-100 object-fit-cover position-relative" style="max-height: 560px; z-index: 2;" alt="Emergency Command Center Infrastructure">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LIVE LOGISTICS & DIRECT INTAKE IDENTIFICATION -->
+<section class="py-5" style="background-color: #fafbfc;">
+    <div class="container py-3">
+        <div class="row g-5 align-items-center">
+
+            <div class="col-lg-6">
+                <span class="text-danger uppercase fw-bold tracking-wider mb-2 d-inline-block" style="font-size:0.85rem; letter-spacing: 1.5px;">COMMAND LOGISTICS REGION</span>
+                <h2 class="display-6 fw-bold text-navy-custom mb-4">Direct Trauma Ward Access</h2>
+                <p class="text-secondary mb-5">
+                    Our specialized clinical facility infrastructure acts instantly. Navigate utilizing the verified geographical coordination framework below or lock pathways with dispatch directly.
+                </p>
+
+                <div class="d-flex flex-column gap-3">
+                    <div class="contact-box-card shadow-sm">
+                        <i class="bi bi-telephone-fill bg-danger-subtle text-danger"></i>
+                        <div>
+                            <h5 class="fw-bold text-navy-custom mb-1">Emergency Dispatch Core</h5>
+                            <p class="text-danger mb-0 fw-bold fs-5">+91 98765 43210</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-box-card shadow-sm">
+                        <i class="bi bi-geo-alt-fill bg-primary-subtle text-primary"></i>
+                        <div>
+                            <h5 class="fw-bold text-navy-custom mb-1">Trauma Intake Destination</h5>
+                            <p class="text-secondary mb-0 fw-semibold">Ayodhya, Uttar Pradesh, India</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-box-card shadow-sm">
+                        <i class="bi bi-clock-fill bg-success-subtle text-success"></i>
+                        <div>
+                            <h5 class="fw-bold text-navy-custom mb-1">Availability Cycle Window</h5>
+                            <p class="text-secondary mb-0">Uninterrupted 24 Hours / 365 Days Continuous Operative Schedule</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="rounded-5 overflow-hidden shadow-lg border border-light w-100 p-0 m-0" style="height: 480px; display: block;">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=Ayodhya,%20Uttar%20Pradesh,%20India&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; display: block;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="row gy-5">
+
+            <div class="col-lg-4">
+                <h3 class="footer-logo fw-bold fs-3">Medicare<span style="color: var(--brand-primary-accent);">+</span></h3>
+                <p class="footer-text mt-3">
+                    Modern high-reliability healthcare environment engineering enterprise-grade medical services and world-class integrated multi-system clinical treatments.
+                </p>
+
+                <div class="footer-social">
+                    <a href="https://github.com/Nitin765kumar" target="_blank" title="GitHub"><i class="bi bi-github"></i></a>
+                    <a href="https://linkedin.com/in/nitinkumar25" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://instagram.com/Nitinkumar812719" target="_blank" title="Instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="https://youtube.com/@nitinkumar8487" target="_blank" title="YouTube"><i class="bi bi-youtube"></i></a>
+                    <a href="https://www.fiverr.com/s/m58V7rP" target="_blank" title="Fiverr"><i class="bi bi-briefcase-fill"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-6">
+                <h5>Quick Links</h5>
+                <ul class="footer-links list-unstyled d-flex flex-column gap-2 mt-3">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <h5>Departments</h5>
+                <ul class="footer-links list-unstyled d-flex flex-column gap-2 mt-3">
+                    <li><a href="cardiology.html">Cardiology Core</a></li>
+                    <li><a href="neurology.html">Neurology Medicine</a></li>
+                    <li><a href="orthopedics.html">Orthopedic Surgery</a></li>
+                    <li><a href="emergency.html">Emergency & Trauma Care</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-3">
+                <h5>Newsletter Core</h5>
+                <p class="footer-text mt-3">Subscribe for high-priority clinical advisories and updates.</p>
+                <form class="footer-form">
+                    <input type="email" placeholder="Enter secure email link" required>
+                    <button type="submit">
+                        <i class="bi bi-send-fill"></i>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p class="mb-0 text-muted">
+                © 2026 Medicare+ Healthcare Platform. Built to Advanced Structural Standards. All Rights Reserved.
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- INLINE INTERACTIVE CONTROLLER LOGIC ENGINE -->
+<script>
+    // Live Dashboard Operational Metric Simulators
+    function updateLiveMetrics() {
+        const timerNode = document.getElementById('live-dispatch-timer');
+        const capacityNode = document.getElementById('live-capacity-metric');
+        
+        if(timerNode && capacityNode) {
+            // Generates believable operational fluctuations cleanly
+            const dynamicTimer = (4.0 + Math.random() * 0.5).toFixed(1);
+            const dynamicCapacity = Math.floor(78 + Math.random() * 10);
+            
+            timerNode.innerText = dynamicTimer + ' Minutes';
+            capacityNode.innerText = dynamicCapacity + '% Available';
+        }
+    }
+    setInterval(updateLiveMetrics, 8000);
+
+    // Interactive Virtual Triage Logic System
+    function processTriage(severity) {
+        const optionsPanel = document.getElementById('triage-options-panel');
+        const resultPanel = document.getElementById('triage-result-panel');
+        const stepTitle = document.getElementById('triage-step-title');
+        
+        const alertContainer = document.getElementById('triage-severity-alert');
+        const alertIcon = document.getElementById('triage-alert-icon');
+        const heading = document.getElementById('triage-alert-heading');
+        const body = document.getElementById('triage-alert-body');
+        const protocolList = document.getElementById('triage-protocol-list');
+        
+        optionsPanel.style.display = 'none';
+        resultPanel.style.display = 'block';
+        stepTitle.innerText = "System Severity Analysis Result:";
+        
+        protocolList.innerHTML = ''; // Flushes child structures clearly
+        
+        if (severity === 'critical') {
+            alertContainer.className = "alert alert-danger d-flex align-items-center gap-3 p-4 rounded-4 mb-4";
+            alertIcon.className = "bi bi-exclamation-triangle-fill text-danger fs-2";
+            heading.innerText = "CRITICAL ALPHA RISK PROFILE DETECTED";
+            body.innerText = "Indicators point toward systemic perfusion failure or cardiac risk. Time is the foundational factor.";
+            
+            const steps = [
+                "Emergency dispatch routing units are alerted to lock local tracking coordinates.",
+                "Acquire chewable aspirin immediately if clearing cardiac assessment constraints.",
+                "Unlock structural passage paths for upcoming trauma tech arrivals."
+            ];
+            steps.forEach(st => {
+                protocolList.innerHTML += `<li class="list-group-item d-flex align-items-center gap-2 border-0 px-0 py-2 text-secondary"><i class="bi bi-check-circle-fill text-danger"></i>${st}</li>`;
+            });
+        } 
+        else if (severity === 'urgent') {
+            alertContainer.className = "alert alert-warning d-flex align-items-center gap-3 p-4 rounded-4 mb-4";
+            alertIcon.className = "bi bi-exclamation-diamond-fill text-warning fs-2";
+            heading.innerText = "HIGH-PRIORITY URGENT CARE CLASSIFICATION";
+            body.innerText = "Potential neurovascular or profound deep structural tissue events detected. High urgency protocol.";
+            
+            const steps = [
+                "Maintain static posture profile, avoiding physical movement metrics.",
+                "Prepare personal identification documentation portfolios clearly.",
+                "Our triage unit is ready to route case file entry tracking parameters immediately."
+            ];
+            steps.forEach(st => {
+                protocolList.innerHTML += `<li class="list-group-item d-flex align-items-center gap-2 border-0 px-0 py-2 text-secondary"><i class="bi bi-check-circle-fill text-warning"></i>${st}</li>`;
+            });
+        } 
+        else {
+            alertContainer.className = "alert alert-primary d-flex align-items-center gap-3 p-4 rounded-4 mb-4";
+            alertIcon.className = "bi bi-info-circle-fill text-primary fs-2";
+            heading.innerText = "STANDARD EMERGENCY STATUS CLASSIFICATION";
+            body.innerText = "Stable vitals suspected but continuous monitoring intervention required to mitigate secondary spikes.";
+            
+            const steps = [
+                "Hydrate using basic temperature clear fluids if zero nausea tracks.",
+                "Secure diagnostic tracking history metrics onto paper portfolios.",
+                "Proceed cleanly to the trauma intake ward structure zone for rapid check-in."
+            ];
+            steps.forEach(st => {
+                protocolList.innerHTML += `<li class="list-group-item d-flex align-items-center gap-2 border-0 px-0 py-2 text-secondary"><i class="bi bi-check-circle-fill text-primary"></i>${st}</li>`;
+            });
+        }
+    }
+
+    function resetTriage() {
+        document.getElementById('triage-options-panel').style.display = 'flex';
+        document.getElementById('triage-result-panel').style.display = 'none';
+        document.getElementById('triage-step-title').innerText = "Identify the Primary Medical Event Condition:";
+    }
+</script>
+
+<script src="assets/js/script.js"></script>
+<script src="assets/js/navbar.js"></script>
+<script src="assets/js/animation.js"></script>
+<script src="assets/js/counter.js"></script>
+<script src="assets/js/slider.js"></script>
+<script src="assets/js/appointment.js"></script>
+
+</body>
+</html>

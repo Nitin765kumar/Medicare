@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neurology Department | World-Class Facility | Medicare+</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <style>
+        :root {
+            --brand-navy: #1a2e40;
+            --brand-primary-accent: #0d6efd;
+        }
+
+        /* Prevent parent container elements from clipping out contents */
+        html, body {
+            height: auto !important;
+            overflow-x: hidden !important;
+            overflow-y: auto !important;
+        }
+
+        .text-navy-custom {
+            color: var(--brand-navy) !important;
+        }
+
+        /* Interactive card tracking transitions */
+        .interactive-card {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .interactive-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.08)!important;
+        }
+
+        .nav-btn {
+            background-color: #dc3545; /* Enforces cohesive danger button theme layout */
+            color: #ffffff !important;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        /* --- VISIBILITY FIX: STYLING FOR DARK FOOTER CONTEXT --- */
+        footer#contact {
+            background-color: #111e2c !important; /* Forces your beautiful dark theme background */
+            color: #e2e8f0 !important;
+        }
+        footer#contact h3.footer-logo, 
+        footer#contact h3.footer-logo span, 
+        footer#contact h5 {
+            color: #ffffff !important;
+        }
+        footer#contact p.footer-text, 
+        footer#contact .text-muted {
+            color: #94a3b8 !important;
+        }
+        footer#contact .footer-links li a {
+            color: #cbd5e1 !important;
+            transition: color 0.2s ease;
+        }
+        footer#contact .footer-links li a:hover {
+            color: var(--brand-primary-accent) !important;
+        }
+
+        /* --- ALIGNMENT FIX: CRITICAL SOCIAL ICON SHAPE CENTER FIX --- */
+        .footer-social {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            flex-wrap: wrap;
+        }
+        .footer-social a {
+            display: inline-flex !important;    /* Uses flex windowing mechanics to center */
+            align-items: center !important;     /* Locks vertical layout alignment */
+            justify-content: center !important;  /* Locks horizontal layout alignment */
+            width: 44px !important;             /* Explicit geometric width matching your background shape */
+            height: 44px !important;            /* Explicit geometric height matching your background shape */
+            line-height: 1 !important;          /* Disables line typography padding drag */
+            text-decoration: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+        .footer-social a i {
+            font-size: 1.25rem !important;      /* Stabilizes icon scale securely inside container */
+            display: inline-block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        .footer-social a:hover {
+            color: var(--brand-primary-accent) !important;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Medicare<span>+</span></a>
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <i class="bi bi-list text-white fs-1"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+                <li class="nav-item"><a class="nav-link" href="appointment.html">Appointment</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item ms-lg-3 mt-3 mt-lg-0"><a href="emergency.html" class="nav-btn">Emergency</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main style="padding-top: 140px; min-height: 100vh; background-color: #f8f9fa;">
+    <div class="container mb-5">
+        
+        <nav aria-label="breadcrumb" class="bg-white p-3 rounded-4 shadow-sm mb-4">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none">Home</a></li>
+                <li class="breadcrumb-item"><a href="services.html" class="text-decoration-none">Services</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Neurology</li>
+            </ol>
+        </nav>
+
+        <div class="bg-white p-4 p-lg-5 rounded-5 shadow-sm mb-5">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=1200&auto=format&fit=crop" class="img-fluid rounded-5 w-100 object-fit-cover shadow-sm" style="max-height: 450px;" alt="Neurology Care">
+                </div>
+                <div class="col-lg-6">
+                    <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3 fs-6 fw-semibold">
+                        <i class="bi bi-capsule-pill me-1"></i> Neurological Sciences & Research
+                    </span>
+                    <h1 class="display-5 fw-bold mb-3" style="color: #1a2e40;">Neurology Department</h1>
+                    <p class="lead text-muted">Equipped for advanced diagnostic treatments and neurocritical operations addressing multi-level brain, spine, and nerve disorders.</p>
+                    <p class="text-secondary">Our comprehensive Stroke Unit runs hyperacute tissue plasminogen activator clinical pathways, combined with targeted neuromuscular assessment architectures for superior patient outcomes.</p>
+                    <div class="mt-4">
+                        <a href="appointment.html" class="hero-btn btn-primary-custom d-inline-block text-decoration-none">Consult Neurologist</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 p-4 rounded-4 shadow-sm interactive-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="p-3 bg-danger-subtle text-danger rounded-3 me-3"><i class="bi bi-eye fs-4"></i></div>
+                        <h4 class="fw-bold m-0 fs-5 text-navy-custom">Target Pathologies</h4>
+                    </div>
+                    <ul class="list-unstyled text-secondary flex-grow-1">
+                        <li class="mb-3"><i class="bi bi-chevron-right text-danger me-2"></i><strong>Acute Ischemic Stroke:</strong> Hyperacute clinical timeline operations and TIA emergency protocols.</li>
+                        <li class="mb-3"><i class="bi bi-chevron-right text-danger me-2"></i><strong>Epilepsy Management:</strong> Video-monitored tracking arrays parsing complex electrical seizures.</li>
+                        <li class="mb-3"><i class="bi bi-chevron-right text-danger me-2"></i><strong>Parkinson's Disease:</strong> Modern kinetic assessments tracking comprehensive movement adjustments.</li>
+                        <li class="mb-3"><i class="bi bi-chevron-right text-danger me-2"></i><strong>Multiple Sclerosis:</strong> Structural neuro-immunological therapeutic protection frameworks.</li>
+                        <li class="mb-2"><i class="bi bi-chevron-right text-danger me-2"></i><strong>Chronic Migraines:</strong> Advanced localized targeted blocking tracking chronic trigeminal neuralgias.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 p-4 rounded-4 shadow-sm interactive-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="p-3 bg-primary-subtle text-primary rounded-3 me-3"><i class="bi bi-clipboard2-pulse fs-4"></i></div>
+                        <h4 class="fw-bold m-0 fs-5 text-navy-custom">Neuro Diagnostics</h4>
+                    </div>
+                    <ul class="list-unstyled text-secondary flex-grow-1">
+                        <li class="mb-3"><i class="bi bi-chevron-right text-primary me-2"></i><strong>3-Tesla Neuro-MRI:</strong> High-field spatial resolutions plotting precise functional brain images.</li>
+                        <li class="mb-3"><i class="bi bi-chevron-right text-primary me-2"></i><strong>24-Channel Digital EEG:</strong> Long-duration continuous electroencephalogram wave tracing records.</li>
+                        <li class="mb-3"><i class="bi bi-chevron-right text-primary me-2"></i><strong>Electromyography (EMG):</strong> Real-time muscular peripheral response mapping structures.</li>
+                        <li class="mb-3"><i class="bi bi-chevron-right text-primary me-2"></i><strong>Conduction Velocity (NCV):</strong> Accurate verification tracking active neural transit path limits.</li>
+                        <li class="mb-2"><i class="bi bi-chevron-right text-primary me-2"></i><strong>Carotid Doppler:</strong> Targeted ultrasound scanning measuring critical cerebrovascular blood volumes.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-lg-4">
+                <div class="card h-100 border-0 p-4 rounded-4 shadow-sm interactive-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="p-3 bg-success-subtle text-success rounded-3 me-3"><i class="bi bi-layers fs-4"></i></div>
+                        <h4 class="fw-bold m-0 fs-5 text-navy-custom">Therapeutic Focus</h4>
+                    </div>
+                    <ul class="list-unstyled text-secondary flex-grow-1">
+                        <li class="mb-3"><i class="bi bi-chevron-right text-success me-2"></i><strong>Thrombolytic Therapy:</strong> Intravenous structural interventions delivering fast clot dissolutions.</li>
+                        <li class="mb-3"><i class="bi bi-chevron-right text-success me-2"></i><strong>Neurocritical Care:</strong> Integrated multi-parameter monitor paths parsing intracranial metrics.</li>
+                        <li class="mb-3"><i class="bi bi-chevron-right text-success me-2"></i><strong>Neurological Botox:</strong> Targeted chemodenervation therapies safely alleviating motor spasms.</li>
+                        <li class="mb-3"><i class="bi bi-chevron-right text-success me-2"></i><strong>DBS Support Mapping:</strong> Post-surgical modulation tracking management for Deep Brain Implants.</li>
+                        <li class="mb-2"><i class="bi bi-chevron-right text-success me-2"></i><strong>Neuro-Rehabilitation:</strong> Specialized cognitive pathways restoring spatial coordination control.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer id="contact" class="pt-5 border-top">
+    <div class="container">
+        <div class="row gy-5">
+            <div class="col-lg-4">
+                <h3 class="footer-logo">Medicare<span>+</span></h3>
+                <p class="footer-text">Modern healthcare platform delivering advanced medical solutions and world-class patient care.</p>
+                
+                <div class="footer-social">
+                    <a href="https://github.com/Nitin765kumar" target="_blank" title="GitHub"><i class="bi bi-github"></i></a>
+                    <a href="https://www.linkedin.com/in/nitinkumar25" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://instagram.com/Nitinkumar812719" target="_blank" title="Instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="https://youtube.com/@nitinkumar8487" target="_blank" title="YouTube"><i class="bi bi-youtube"></i></a>
+                    <a href="https://www.fiverr.com/s/m58V7rP" target="_blank" title="Fiverr"><i class="bi bi-briefcase-fill"></i></a>
+                </div>
+            </div>
+            
+            <div class="col-lg-2 col-md-6">
+                <h5>Quick Links</h5>
+                <ul class="footer-links list-unstyled">
+                    <li><a href="index.html" class="text-decoration-none">Home</a></li>
+                    <li><a href="services.html" class="text-decoration-none">Services</a></li>
+                    <li><a href="doctors.html" class="text-decoration-none">Doctors</a></li>
+                    <li><a href="contact.html" class="text-decoration-none">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <h5>Departments</h5>
+                <ul class="footer-links list-unstyled">
+                    <li><a href="cardiology.html" class="text-decoration-none">Cardiology</a></li>
+                    <li><a href="neurology.html" class="text-decoration-none">Neurology</a></li>
+                    <li><a href="orthopedics.html" class="text-decoration-none">Orthopedics</a></li>
+                    <li><a href="emergency.html" class="text-decoration-none">Emergency Care</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-lg-3">
+                <h5>Newsletter</h5>
+                <p class="footer-text">Subscribe for healthcare updates.</p>
+                <form class="d-flex gap-2">
+                    <input type="email" class="form-control shadow-none border-0" placeholder="Enter Email" style="border-radius: 50px; padding-left: 20px;">
+                    <button class="btn border-0 text-white" style="background-color: var(--brand-primary-accent); border-radius: 50px;" type="submit"><i class="bi bi-send-fill"></i></button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="text-center py-4 border-top mt-5" style="border-color: rgba(255,255,255,0.08) !important;">
+            <p class="mb-0 text-muted">© 2026 Medicare+ Healthcare Platform. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

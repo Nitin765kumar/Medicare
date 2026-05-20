@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Medicare+</title>
+
+    <!-- Bootstrap 5 & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- External Files -->
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Explicit Layout Isolation & Blue Theme Overrides -->
+    <style>
+        :root {
+            /* Branding: Medical Blue Palette */
+            --med-blue-primary: #0056b3;
+            --med-blue-dark: #0a192f;
+            --med-blue-light: #e6f0fa;
+            --med-blue-gradient: linear-gradient(135deg, #0056b3 0%, #003399 100%);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            --card-hover-shadow: 0 20px 40px rgba(0, 86, 179, 0.12);
+        }
+
+        /* Anti-Collapse Base Structure */
+        html, body {
+            height: auto !important;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+        }
+
+        /* Fixed-Navbar Spacing Buffer */
+        body {
+            padding-top: 85px !important; 
+        }
+
+        /* High-Visibility Custom Blue Navbar */
+        .custom-navbar {
+            background-color: var(--med-blue-dark) !important;
+            border-bottom: 3px solid var(--med-blue-primary) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .custom-navbar .navbar-brand,
+        .custom-navbar .nav-link {
+            color: #ffffff !important;
+            opacity: 0.9;
+        }
+        .custom-navbar .nav-link:hover,
+        .custom-navbar .nav-link.active-page {
+            color: #cbd5e1 !important;
+            opacity: 1;
+        }
+
+        /* Hero Wrapper */
+        .services-hero {
+            background: linear-gradient(180deg, rgba(0, 86, 179, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+            padding: 5rem 0;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 86, 179, 0.08);
+            color: var(--med-blue-primary);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Category Filter Buttons */
+        .filter-btn {
+            border: 2px solid #e2e8f0;
+            background: #ffffff;
+            color: #4a5568;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--med-blue-primary);
+            color: var(--med-blue-primary);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: var(--med-blue-gradient);
+            border-color: transparent;
+            color: #ffffff;
+            box-shadow: 0 8px 20px rgba(0, 86, 179, 0.25);
+        }
+
+        /* Interactive Clinical Cards */
+        .service-page-card {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            height: 100%;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-page-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--med-blue-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .service-page-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .service-page-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 65px;
+            height: 65px;
+            background: rgba(0, 86, 179, 0.05);
+            color: var(--med-blue-primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-page-card:hover .service-icon {
+            background: var(--med-blue-gradient);
+            color: #ffffff;
+            transform: rotate(-5deg);
+        }
+
+        .service-page-card h4 {
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-page-card p {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .service-page-card a {
+            color: var(--med-blue-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .service-page-card a i {
+            transition: transform 0.2s ease;
+        }
+
+        .service-page-card a:hover i {
+            transform: translateX(4px);
+        }
+
+        /* Stat Metrics block */
+        .stat-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+
+        /* Call To Action Accent */
+        .cta-box {
+            background: var(--med-blue-gradient);
+            color: #ffffff;
+            border-radius: 24px;
+            padding: 4rem 2rem;
+            box-shadow: 0 15px 35px rgba(0, 86, 179, 0.2);
+        }
+
+        /* Anti-Overlap Main Body Shield */
+        main {
+            flex: 1 0 auto; /* Pushes the footer down if content is short */
+            position: relative;
+            z-index: 1;
+            display: block;
+            width: 100%;
+        }
+
+        /* Bulletproof Layout-Isolated Footer (Deep Blue Theme) */
+        .isolated-footer {
+            background-color: var(--med-blue-dark) !important;
+            color: #e2e8f0 !important;
+            position: relative !important;
+            display: block !important;
+            clear: both !important;
+            z-index: 999 !important; /* Forces layout layer priority */
+            margin-top: auto !important; /* Latches footer securely to bottom */
+            border-top: 4px solid var(--med-blue-primary) !important;
+        }
+
+        .isolated-footer a {
+            color: #94a3b8 !important;
+            transition: color 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .isolated-footer a:hover {
+            color: #ffffff !important;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ===================================================== -->
+<!-- NAVIGATION (NAVBAR CHANGED TO MEDICAL DEEP BLUE) -->
+<!-- ===================================================== -->
+<nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-white" href="index.html">
+            Medicare<span style="color: #60a5fa;">+</span>
+        </a>
+        <button class="navbar-toggler border-light text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <i class="bi bi-list fs-3"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item"><a class="nav-link px-3" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link active-page fw-bold px-3" href="#">Services</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="doctors.html">Doctors</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="appointment.html">Appointment</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="contact.html">Contact</a></li>
+                <li class="nav-item ms-lg-3">
+                    <a href="emergency.html" class="btn btn-danger rounded-pill px-4 shadow-sm fw-bold">Emergency</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Main content layer shielding structural elements -->
+<main>
+
+    <!-- ===================================================== -->
+    <!-- HERO SECTION -->
+    <!-- ===================================================== -->
+    <section class="services-hero">
+        <div class="container">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-6">
+                    <div class="hero-badge">
+                        <i class="bi bi-heart-pulse-fill"></i> Comprehensive Medical Care
+                    </div>
+                    <h1 class="display-4 fw-bold text-dark mb-3">
+                        Advanced Healthcare Engineered For Life
+                    </h1>
+                    <p class="lead text-muted mb-4">
+                        Explore our diverse clinical specialization tracks. From routine wellness operations to complex robotic surgeries, our system covers all dimensions of family health.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="appointment.html" class="btn btn-primary btn-lg rounded-pill px-4 py-2" style="background: var(--med-blue-gradient); border:none;">
+                            Book Consultation
+                        </a>
+                        <a href="#departments" class="btn btn-outline-secondary btn-lg rounded-pill px-4 py-2">
+                            View Departments
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1657028310103-f53dd49a856a?w=600&auto=format&fit=crop&q=60" alt="Clinical Lab Environment" class="img-fluid rounded-4 shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- STATISTICS PRESET -->
+    <!-- ===================================================== -->
+    <section class="py-4 bg-white border-y">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <h2 class="fw-bold mb-1" style="color: var(--med-blue-primary);">99.4%</h2>
+                        <p class="text-muted small mb-0">Surgical Success Rate</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <h2 class="fw-bold mb-1" style="color: var(--med-blue-primary);">150+</h2>
+                        <p class="text-muted small mb-0">Expert Consultants</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <h2 class="fw-bold mb-1" style="color: var(--med-blue-primary);">24/7</h2>
+                        <p class="text-muted small mb-0">Emergency Coverage</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <h2 class="fw-bold mb-1" style="color: var(--med-blue-primary);">15+</h2>
+                        <p class="text-muted small mb-0">Global Certifications</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- DEPARTMENTS EXPANDED GRID -->
+    <!-- ===================================================== -->
+    <section id="departments" class="py-5">
+        <div class="container py-4">
+            
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-dark display-6">Our Specializations</h2>
+                <p class="text-muted mx-auto" style="max-width: 550px;">
+                    Filter through our custom care groups to find tailored professional medical support.
+                </p>
+            </div>
+
+            <!-- Filter Controls -->
+            <div class="d-flex justify-content-center flex-wrap gap-2 mb-5">
+                <button class="filter-btn active" data-filter="all">All Specialties</button>
+                <button class="filter-btn" data-filter="critical">Critical Care</button>
+                <button class="filter-btn" data-filter="general">General Care</button>
+                <button class="filter-btn" data-filter="specialty">Specialized Tracks</button>
+            </div>
+
+            <!-- Dynamic Grid Wrap -->
+            <div class="row g-4" id="services-grid">
+                
+                <!-- Cardiology -->
+                <div class="col-lg-4 col-md-6 service-card-wrapper" data-category="critical">
+                    <div class="service-page-card">
+                        <div class="service-icon"><i class="bi bi-heart-pulse-fill"></i></div>
+                        <h4>Cardiology</h4>
+                        <p>Comprehensive diagnostic angiographies, structural heart failure processing, and immediate rhythm management procedures.</p>
+                        <a href="cardiology.html">Explore Department <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Neurology -->
+                <div class="col-lg-4 col-md-6 service-card-wrapper" data-category="specialty">
+                    <div class="service-page-card">
+                        <div class="service-icon"><i class="bi bi-activity"></i></div>
+                        <h4>Neurology & CNS</h4>
+                        <p>Treatment paths for complex neuromuscular conditions, precision spinal interventions, and cognitive disease tracking.</p>
+                        <a href="neurology.html">Explore Department <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Emergency -->
+                <div class="col-lg-4 col-md-6 service-card-wrapper" data-category="critical">
+                    <div class="service-page-card">
+                        <div class="service-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                        <h4>Trauma & Emergency</h4>
+                        <p>Immediate state-of-the-art life support systems, rapid trauma response squads, and fully optimized triage operations.</p>
+                        <a href="emergency.html">Explore Department <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Dental -->
+                <div class="col-lg-4 col-md-6 service-card-wrapper" data-category="general">
+                    <div class="service-page-card">
+                        <div class="service-icon"><i class="bi bi-shield-plus"></i></div>
+                        <h4>Advanced Dental</h4>
+                        <p>Advanced root-canal treatments, modern cosmetic design surgeries, and reconstructive micro-orthodontic operations.</p>
+                        <a href="dental.html">Explore Department <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Orthopedics -->
+                <div class="col-lg-4 col-md-6 service-card-wrapper" data-category="general">
+                    <div class="service-page-card">
+                        <div class="service-icon"><i class="bi bi-person-fill-exclamation"></i></div>
+                        <h4>Orthopedics & Joints</h4>
+                        <p>Total knee/hip structural replacement paths, minimally invasive arthroscopic sport repair treatments, and structural physical therapy.</p>
+                        <a href="orthopedics.html">Explore Department <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Pulmonology -->
+                <div class="col-lg-4 col-md-6 service-card-wrapper" data-category="specialty">
+                    <div class="service-page-card">
+                        <div class="service-icon"><i class="bi bi-lungs-fill"></i></div>
+                        <h4>Pulmonology</h4>
+                        <p>Advanced respiratory therapy, sleep apnea diagnostics, chronic asthma support, and intensive lung-capacity testing workflows.</p>
+                        <a href="pulmonology.html">Explore Department <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Pediatrics -->
+                <div class="col-lg-4 col-md-6 service-card-wrapper" data-category="general">
+                    <div class="service-page-card">
+                        <div class="service-icon"><i class="bi bi-egg-fried"></i></div>
+                        <h4>Pediatrics</h4>
+                        <p>Comprehensive newborn health processing tracking, preventative pediatric vaccinations, and child development milestones support.</p>
+                        <a href="pediatrics.html">Explore Department <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Oncology -->
+                <div class="col-lg-4 col-md-6 service-card-wrapper" data-category="critical">
+                    <div class="service-page-card">
+                        <div class="service-icon"><i class="bi bi-radioactive"></i></div>
+                        <h4>Clinical Oncology</h4>
+                        <p>Targeted biomarker therapies, safe high-precision radiation oncology tracking, and compassionate chemotherapy management plans.</p>
+                        <a href="oncology.html">Explore Department <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Dermatology -->
+                <div class="col-lg-4 col-md-6 service-card-wrapper" data-category="specialty">
+                    <div class="service-page-card">
+                        <div class="service-icon"><i class="bi bi-fingerprint"></i></div>
+                        <h4>Dermatology</h4>
+                        <p>Advanced treatment for chronic skin diseases, skin cancer screening paths, and safe medical-grade aesthetic procedures.</p>
+                        <a href="dermatology.html">Explore Department <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- VALUE PROPOSITION -->
+    <!-- ===================================================== -->
+    <section class="py-5" style="background-color: #f1f5f9;">
+        <div class="container py-4">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <img src="https://plus.unsplash.com/premium_photo-1723921308333-013c017c4878?w=600&auto=format&fit=crop&q=60" class="img-fluid rounded-4 shadow" alt="Medical Diagnostics Operations">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="fw-bold text-dark mb-4">Patient-Centric Standards</h2>
+                    
+                    <div class="d-flex gap-3 mb-4 p-3 bg-white rounded-3 shadow-sm">
+                        <i class="bi bi-shield-check text-success fs-3"></i>
+                        <div>
+                            <h5 class="fw-bold text-dark mb-1">Global Standard Accreditations</h5>
+                            <p class="text-muted small mb-0">Our laboratory networks fully strictly adhere to international diagnostic benchmarks.</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-3 mb-4 p-3 bg-white rounded-3 shadow-sm">
+                        <i class="bi bi-clock-history text-success fs-3"></i>
+                        <div>
+                            <h5 class="fw-bold text-dark mb-1">Zero-Wait Priority Pass</h5>
+                            <p class="text-muted small mb-0">Pre-booked outpatients enjoy direct, frictionless consulting room entries.</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-3 p-3 bg-white rounded-3 shadow-sm">
+                        <i class="bi bi-wallet2 text-success fs-3"></i>
+                        <div>
+                            <h5 class="fw-bold text-dark mb-1">Transparent Insurance Integration</h5>
+                            <p class="text-muted small mb-0">Direct tie-ups with key providers for smooth, paperless claim clearance workflows.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- CALL TO ACTION (CTA) -->
+    <!-- ===================================================== -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <div class="cta-box text-center">
+                <h2 class="fw-bold mb-3">Consult With Our Experts Today</h2>
+                <p class="mb-4 mx-auto opacity-75" style="max-width: 600px;">
+                    Connect with our medical staff right now. Get professional diagnostics advice and verified healthcare treatment mappings.
+                </p>
+                <a href="appointment.html" class="btn btn-light btn-lg rounded-pill px-5 py-3 fw-bold text-primary shadow">
+                    Schedule Appointment
+                </a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===================================================== -->
+<!-- BULLETPROOF FOOTER (CHANGED TO DEEP BLUE OVERRIDE) -->
+<!-- ===================================================== -->
+<footer class="isolated-footer text-white pt-5 pb-4">
+    <div class="container">
+        <div class="row gy-5">
+            <!-- Brand Column -->
+            <div class="col-lg-4">
+                <h3 class="fw-bold text-white mb-3">Medicare<span style="color: #60a5fa;">+</span></h3>
+                <p class="text-muted small mb-4" style="line-height: 1.7; color: #94a3b8 !important;">
+                    Modern international clinical healthcare systems ecosystem engineered to deliver precise diagnostic records and comprehensive disease interventions.
+                </p>
+                <div class="d-flex gap-2">
+                    <a href="https://github.com/Nitin765kumar" target="_blank" class="btn btn-sm btn-outline-light rounded-circle"><i class="bi bi-github"></i></a>
+                    <a href="https://linkedin.com/in/nitinkumar25" target="_blank" class="btn btn-sm btn-outline-light rounded-circle"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://instagram.com/Nitinkumar812719" target="_blank" class="btn btn-sm btn-outline-light rounded-circle"><i class="bi bi-instagram"></i></a>
+                    <a href="https://youtube.com/@nitinkumar8487" target="_blank" class="btn btn-sm btn-outline-light rounded-circle"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+
+            <!-- Links Column -->
+            <div class="col-lg-2 col-md-6">
+                <h5 class="text-uppercase small fw-bold tracking-wider mb-3 text-white">Quick Access</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="index.html" class="text-decoration-none">Home Core</a></li>
+                    <li class="mb-2"><a href="about.html" class="text-decoration-none">Our History</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">Medical Services</a></li>
+                    <li class="mb-2"><a href="contact.html" class="text-decoration-none">Contact Desk</a></li>
+                </ul>
+            </div>
+
+            <!-- Specialties Column -->
+            <div class="col-lg-3 col-md-6">
+                <h5 class="text-uppercase small fw-bold tracking-wider mb-3 text-white">Key Tracks</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-decoration-none">Cardiology Center</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">Neurology Labs</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">Trauma Triage</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">Orthopedic Unit</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="col-lg-3">
+                <h5 class="text-uppercase small fw-bold tracking-wider mb-3 text-white">Medical Insights</h5>
+                <p class="small mb-3" style="color: #94a3b8;">Join our automated clinical letter mailing track for verified wellness tips.</p>
+                <form class="input-group">
+                    <input type="email" class="form-control bg-transparent border-secondary text-white" placeholder="Patient Email" required style="border-color: #334155 !important;">
+                    <button class="btn btn-primary" type="submit" style="background-color: var(--med-blue-primary); border-color: var(--med-blue-primary);"><i class="bi bi-arrow-right-short"></i></button>
+                </form>
+            </div>
+        </div>
+
+        <hr class="my-4" style="border-color: #334155 !important;">
+
+        <div class="row">
+            <div class="col-12 text-center small" style="color: #64748b;">
+                <p class="mb-0">© 2026 Medicare+ Healthcare Ecosystem. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Restructured Layout-Safe JS Filter Engine -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const cards = document.querySelectorAll(".service-card-wrapper");
+
+        filterButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                filterButtons.forEach(btn => btn.classList.remove("active"));
+                this.classList.add("active");
+
+                const targetFilter = this.getAttribute("data-filter");
+
+                cards.forEach(card => {
+                    const cardCategory = card.getAttribute("data-category");
+                    
+                    if (targetFilter === "all" || cardCategory === targetFilter) {
+                        card.classList.remove("d-none");
+                        card.classList.add("d-block");
+                    } else {
+                        card.classList.remove("d-block");
+                        card.classList.add("d-none");
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+<!-- Additional Custom Animation Triggers -->
+<script src="assets/js/script.js"></script>
+<script src="assets/js/navbar.js"></script>
+<script src="assets/js/animation.js"></script>
+
+</body>
+</html>

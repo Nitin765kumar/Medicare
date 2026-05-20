@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors | Medicare+</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Embedded Theme Styles -->
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #0dcaf0;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --accent-gradient: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+
+        /* Navbar Custom Styling */
+        .navbar {
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #fff !important;
+        }
+        .navbar-brand span { color: var(--secondary-color); }
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            margin: 0 0.5rem;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+        .nav-link:hover, .nav-link.active { color: var(--secondary-color) !important; }
+        .nav-btn {
+            background: #ef4444;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            display: inline-block;
+        }
+        .nav-btn:hover { background: #dc2626; color: white; transform: translateY(-2px); }
+
+        /* Hero Section */
+        .doctors-hero {
+            position: relative;
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding-top: 120px;
+            overflow: hidden;
+        }
+        .blur-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: 1;
+        }
+        .blur-1 { width: 400px; height: 400px; background: var(--primary-color); top: -10%; right: -5%; }
+        .blur-2 { width: 300px; height: 300px; background: var(--secondary-color); bottom: 10%; left: -5%; }
+        
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .hero-btn {
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            display: inline-block;
+        }
+        .btn-primary-custom { background: var(--accent-gradient); color: white; border: none; }
+        .btn-primary-custom:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(13, 110, 253, 0.3); color: white; }
+        .btn-outline-custom { border: 2px solid white; color: white; }
+        .btn-outline-custom:hover { background: white; color: var(--dark-color); transform: translateY(-3px); }
+
+        .doctors-hero-image img {
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            max-height: 500px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        /* Filter Controls */
+        .filter-container {
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .filter-btn {
+            background: transparent;
+            border: 1px solid #e2e8f0;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            color: #64748b;
+            transition: var(--transition-smooth);
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        .search-control {
+            border: 1px solid #e2e8f0;
+            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            border-radius: 8px;
+            width: 100%;
+        }
+        .search-wrapper { position: relative; }
+        .search-wrapper i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+
+        /* Doctor Grid Cards */
+        .doctors-section { padding: 80px 0; }
+        .doctor-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01), 0 2px 4px -1px rgba(0,0,0,0.01);
+            transition: var(--transition-smooth);
+            height: 100%;
+            border: 1px solid #f1f5f9;
+        }
+        .doctor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+        }
+        .doctor-image {
+            position: relative;
+            height: 320px;
+            overflow: hidden;
+        }
+        .doctor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+        .doctor-card:hover .doctor-image img { transform: scale(1.05); }
+        
+        .availability-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(34, 197, 94, 0.9);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+        }
+        .availability-badge.busy { background: rgba(239, 68, 68, 0.9); }
+
+        .doctor-content { padding: 1.5rem; }
+        .doctor-dept {
+            color: var(--primary-color);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .doctor-card h4 { font-weight: 700; margin-bottom: 0.5rem; color: var(--dark-color); }
+        .rating-stars { color: #f59e0b; margin-bottom: 1rem; font-size: 0.9rem; }
+        
+        .doctor-meta-info {
+            border-top: 1px solid #f1f5f9;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .doctor-social a {
+            width: 36px;
+            height: 36px;
+            background: #f1f5f9;
+            color: var(--dark-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            margin-right: 0.5rem;
+            transition: var(--transition-smooth);
+        }
+        .doctor-social a:hover { background: var(--primary-color); color: white; }
+
+        /* Action Box / CTA */
+        .doctor-cta { padding-bottom: 80px; }
+        .doctor-cta-box {
+            background: var(--accent-gradient);
+            border-radius: 24px;
+            padding: 4rem 2rem;
+            color: white;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(13, 110, 253, 0.2);
+        }
+
+        /* Footer Customization */
+        footer { background: #0f172a; color: #94a3b8; padding: 80px 0 30px; border-top: 1px solid #1e293b; }
+        .footer-logo { color: white; font-weight: 700; margin-bottom: 1.5rem; }
+        .footer-logo span { color: var(--secondary-color); }
+        .footer-social a {
+            color: white;
+            background: rgba(255,255,255,0.05);
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            transition: var(--transition-smooth);
+        }
+        .footer-social a:hover { background: var(--primary-color); transform: translateY(-3px); }
+        footer h5 { color: white; font-weight: 600; margin-bottom: 1.5rem; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: #94a3b8; text-decoration: none; transition: var(--transition-smooth); }
+        .footer-links a:hover { color: white; padding-left: 5px; }
+        
+        .footer-form { position: relative; display: flex; }
+        .footer-form input {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #1e293b;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            color: white;
+            width: 100%;
+        }
+        .footer-form button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            bottom: 5px;
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 0 1rem;
+            border-radius: 6px;
+        }
+        .footer-bottom { border-top: 1px solid #1e293b; margin-top: 50px; padding-top: 30px; text-align: center; font-size: 0.9rem; }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Medicare<span>+</span></a>
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <i class="bi bi-list text-white fs-1"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                <li class="nav-item"><a class="nav-link active" href="doctors.html">Doctors</a></li>
+                <li class="nav-item"><a class="nav-link" href="appointment.html">Appointment</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                    <a href="emergency.html" class="nav-btn">Emergency</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="doctors-hero">
+    <div class="blur-circle blur-1"></div>
+    <div class="blur-circle blur-2"></div>
+    <div class="container">
+        <div class="row align-items-center pt-5 min-vh-75">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="doctors-hero-content">
+                    <div class="hero-badge">
+                        <i class="bi bi-heart-pulse-fill text-info"></i> Medical Care Superstars
+                    </div>
+                    <h1 class="display-4 fw-bold mb-3">Meet Our Highly Specialized Doctors</h1>
+                    <p class="lead text-white-50 mb-4">Our clinical panel draws top-tier diagnostic talent and experienced modern specialists together to secure your family's lifelong health security.</p>
+                    <div class="hero-buttons gap-3 d-flex">
+                        <a href="appointment.html" class="hero-btn btn-primary-custom">Book Appointment</a>
+                        <a href="contact.html" class="hero-btn btn-outline-custom">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="doctors-hero-image text-center">
+                    <img src="https://plus.unsplash.com/premium_photo-1661580574627-9211124e5c3f?q=80&w=1200" alt="Medical Team Teamwork">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RUNTIME CONTROL SUITE (SEARCH & FILTERS) -->
+<div class="container">
+    <div class="filter-container">
+        <div class="row g-3 align-items-center justify-content-between">
+            <div class="col-xl-8 col-lg-8">
+                <div class="d-flex flex-wrap gap-2" id="filter-buttons-root">
+                    <button class="filter-btn active" data-filter="all">All Specialties</button>
+                    <button class="filter-btn" data-filter="cardiology">Cardiology</button>
+                    <button class="filter-btn" data-filter="neurology">Neurology</button>
+                    <button class="filter-btn" data-filter="dental">Dental Surgery</button>
+                    <button class="filter-btn" data-filter="orthopedics">Orthopedics</button>
+                    <button class="filter-btn" data-filter="pulmonology">Pulmonology</button>
+                    <button class="filter-btn" data-filter="emergency">Emergency Care</button>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4">
+                <div class="search-wrapper">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="doctor-search" class="search-control" placeholder="Search doctor names or qualifications...">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="doctors-section">
+    <div class="container">
+        <div class="section-title text-center mb-5">
+            <h2 class="fw-bold">Our Medical Specialists</h2>
+            <p class="text-muted">Directly access premier medical interventions across our specialized departments.</p>
+        </div>
+
+        <!-- Target Injection Grid Container -->
+        <div class="row g-4" id="doctors-grid-target">
+            <!-- Rendered Dynamic Grid Injected Here via Script -->
+        </div>
+    </div>
+</section>
+
+<section class="doctor-cta">
+    <div class="container">
+        <div class="doctor-cta-box">
+            <h2 class="fw-bold mb-3">Need Immediate Professional Medical Advice?</h2>
+            <p class="mb-4 max-w-600 mx-auto opacity-75">Connect with any of our active medical practitioners right away. Our reservation hotline offers real-time status management to minimize emergency wait-times.</p>
+            <a href="appointment.html" class="hero-btn btn-primary-custom px-5">Book Your Visit Now</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="row gy-5">
+            <div class="col-lg-4">
+                <h3 class="footer-logo">Medicare<span>+</span></h3>
+                <p class="footer-text">Providing reliable diagnostics and targeted modern healthcare infrastructure from our comprehensive regional medical centers.</p>
+                <div class="footer-social">
+                    <a href="https://github.com/Nitin765kumar" target="_blank"><i class="bi bi-github"></i></a>
+                    <a href="https://linkedin.com/in/nitinkumar25" target="_blank"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://instagram.com/Nitinkumar812719" target="_blank"><i class="bi bi-instagram"></i></a>
+                    <a href="https://youtube.com/@nitinkumar8487" target="_blank"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <h5>Quick Links</h5>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h5>Departments</h5>
+                <ul class="footer-links">
+                    <li><a href="#">Cardiology</a></li>
+                    <li><a href="#">Neurology</a></li>
+                    <li><a href="#">Emergency Care</a></li>
+                    <li><a href="#">Orthopedics Support</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h5>Newsletter</h5>
+                <p class="footer-text">Subscribe for upcoming community health initiatives.</p>
+                <form class="footer-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+                    <input type="email" placeholder="Enter Email" required>
+                    <button type="submit"><i class="bi bi-send-fill"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Medicare+ Healthcare Platform. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap Bundle JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Inline Database Engine & Live Content Controller -->
+<script>
+    // 1. Comprehensive Local Database Payload 
+    const DOCTORS_DATABASE = [
+        {
+            id: 1,
+            name: "Dr. Sarah Johnson",
+            specialty: "cardiology",
+            displaySpecialty: "Cardiologist",
+            qualification: "MD, FACC - Cardiovascular Surgery",
+            bio: "Specialist in advanced heart care interventions and complex structural cardiac operations.",
+            rating: 5,
+            experience: "14+ Yrs Exp",
+            status: "Available",
+            image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=600&auto=format&fit=crop"
+        },
+        {
+            id: 2,
+            name: "Dr. Michael Smith",
+            specialty: "neurology",
+            displaySpecialty: "Neurologist",
+            qualification: "Ph.D., MD - Neurological Diagnostics",
+            bio: "Expert researcher in neurological conditions and advanced degenerative diagnostics.",
+            rating: 4,
+            experience: "11+ Yrs Exp",
+            status: "Available",
+            image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=600&auto=format&fit=crop"
+        },
+        {
+            id: 3,
+            name: "Dr. Emily Brown",
+            specialty: "dental",
+            displaySpecialty: "Dental Surgeon",
+            qualification: "BDS, MDS - Oral Maxillofacial Surgery",
+            bio: "Professional aesthetic dental reconstruction and micro-surgical maxillofacial repair.",
+            rating: 5,
+            experience: "9+ Yrs Exp",
+            status: "Available",
+            image: "https://plus.unsplash.com/premium_photo-1664475543697-229156438e1e?w=600&auto=format&fit=crop"
+        },
+        {
+            id: 4,
+            name: "Dr. David Wilson",
+            specialty: "orthopedics",
+            displaySpecialty: "Orthopedic Specialist",
+            qualification: "MD - Joint Reconstruction & Sports Trauma",
+            bio: "Comprehensive articular joint therapy, corrective alignment, and arthroscopic procedures.",
+            rating: 4,
+            experience: "16+ Yrs Exp",
+            status: "Busy",
+            image: "https://plus.unsplash.com/premium_photo-1658506671316-0b293df7c72b?w=600&auto=format&fit=crop"
+        },
+        {
+            id: 5,
+            name: "Dr. Olivia Taylor",
+            specialty: "pulmonology",
+            displaySpecialty: "Pulmonologist",
+            qualification: "MD - Pulmonary & Intensive Critical Care",
+            bio: "Respiratory care specialist dealing with complex pulmonary function and chronic conditions.",
+            rating: 5,
+            experience: "8+ Yrs Exp",
+            status: "Available",
+            image: "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?q=80&w=600&auto=format&fit=crop"
+        },
+        {
+            id: 6,
+            name: "Dr. James Anderson",
+            specialty: "emergency",
+            displaySpecialty: "Emergency Specialist",
+            qualification: "MD - Trauma & Critical Resuscitation Medicine",
+            bio: "Manages urgent critical trauma situations and acute medical triage.",
+            rating: 5,
+            experience: "12+ Yrs Exp",
+            status: "Available",
+            image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=600&auto=format&fit=crop"
+        }
+    ];
+
+    // 2. Application Core Elements Management
+    const targetGrid = document.getElementById('doctors-grid-target');
+    const searchInput = document.getElementById('doctor-search');
+    const filterButtons = document.querySelectorAll('#filter-buttons-root .filter-btn');
+
+    let globalSearchFilterString = "";
+    let globalActiveDepartmentFilter = "all";
+
+    // 3. Grid Rendering Engine
+    function paintRenderCycle() {
+        // Run analytical intersections matching state criteria
+        const compileDataset = DOCTORS_DATABASE.filter(item => {
+            const matchesCategory = (globalActiveDepartmentFilter === "all" || item.specialty === globalActiveDepartmentFilter);
+            const matchesQuery = item.name.toLowerCase().includes(globalSearchFilterString) || 
+                                 item.qualification.toLowerCase().includes(globalSearchFilterString) ||
+                                 item.displaySpecialty.toLowerCase().includes(globalSearchFilterString);
+            return matchesCategory && matchesQuery;
+        });
+
+        // Clean out existing layout child nodes
+        targetGrid.innerHTML = "";
+
+        // UI Feedback Handling for empty data collections
+        if(compileDataset.length === 0) {
+            targetGrid.innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <i class="bi bi-exclamation-circle text-muted fs-1 mb-3 d-block"></i>
+                    <h5 class="text-secondary fw-semibold">No Doctors Match Your Specific Filters</h5>
+                    <p class="text-muted small">Try refining your structural keywords or check alternative department scopes.</p>
+                </div>`;
+            return;
+        }
+
+        // Run component mapping matrix pipeline
+        compileDataset.forEach(cardData => {
+            // Compute stars string layout
+            let starsElementMarkup = "";
+            for (let index = 1; index <= 5; index++) {
+                starsElementMarkup += index <= cardData.rating ? `<i class="bi bi-star-fill"></i> ` : `<i class="bi bi-star"></i> `;
+            }
+
+            const cardWrapperDiv = document.createElement('div');
+            cardWrapperDiv.className = "col-lg-4 col-md-6 card-item-node animate-fade";
+            cardWrapperDiv.innerHTML = `
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <span class="availability-badge ${cardData.status.toLowerCase() === 'busy' ? 'busy' : ''}">
+                            ${cardData.status}
+                        </span>
+                        <img src="${cardData.image}" alt="${cardData.name}">
+                    </div>
+                    <div class="doctor-content">
+                        <span class="doctor-dept">${cardData.displaySpecialty}</span>
+                        <h4>${cardData.name}</h4>
+                        <div class="text-muted small fw-semibold mb-2">${cardData.qualification}</div>
+                        <div class="rating-stars">${starsElementMarkup} <span class="text-muted small">(${cardData.experience})</span></div>
+                        <p class="text-muted small mb-4">${cardData.bio}</p>
+                        
+                        <div class="d-flex align-items-center justify-content-between doctor-meta-info">
+                            <div class="doctor-social">
+                                <a href="#"><i class="bi bi-facebook"></i></a>
+                                <a href="#"><i class="bi bi-instagram"></i></a>
+                                <a href="#"><i class="bi bi-linkedin"></i></a>
+                            </div>
+                            <a href="appointment.html?doc_id=${cardData.id}" class="btn btn-outline-primary btn-sm rounded-pill px-3">Book Visit</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            targetGrid.appendChild(cardWrapperDiv);
+        });
+    }
+
+    // 4. Input & Event Listeners Processing Setup
+    searchInput.addEventListener('input', (event) => {
+        globalSearchFilterString = event.target.value.toLowerCase().trim();
+        paintRenderCycle();
+    });
+
+    filterButtons.forEach(actionButton => {
+        actionButton.addEventListener('click', () => {
+            // Remove active states across buttons collection
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            actionButton.classList.add('active');
+
+            globalActiveDepartmentFilter = actionButton.getAttribute('data-filter');
+            paintRenderCycle();
+        });
+    });
+
+    // 5. Initial Run Initialization Execution
+    document.addEventListener("DOMContentLoaded", () => {
+        paintRenderCycle();
+    });
+</script>
+
+</body>
+</html>
