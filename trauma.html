@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Medicare+ Trauma & Acute Care Department offers 24/7 level-1 emergency response, advanced resuscitation theaters, polytrauma stabilization, and immediate critical surgical interventions.">
+    <meta name="keywords" content="Medicare+, Trauma Center, Emergency Medicine, Acute Care, Resuscitation, Polytrauma Surgery">
+    <meta name="author" content="Medicare+ Systems">
+
+    <title>Trauma & Emergency Care | Medicare+</title>
+
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        :root {
+            --primary-color: #dc3545; /* Red alert tone customized specifically for high-priority Trauma emergency branding */
+            --primary-dark: #bd2130;
+            --primary-light: #f8d7da;
+            --dark-bg: #111827;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #4b5563;
+            overflow-x: hidden;
+            background-color: #f9fafb;
+            width: 100%;
+        }
+
+        /* --- NAVBAR GLASSMORPHISM --- */
+        .navbar {
+            background: rgba(220, 53, 69, 0.95); /* Red glass theme to signify emergency dispatch level status */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: var(--transition-smooth);
+            z-index: 1050;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #ffffff !important;
+        }
+        .navbar-brand span {
+            color: #ffc107;
+        }
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            padding: 8px 16px !important;
+            transition: var(--transition-smooth);
+            border-radius: 4px;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .nav-btn {
+            background: #ffc107;
+            color: #111827 !important;
+            font-weight: 600;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+        }
+        .nav-btn:hover {
+            background: #e0a800;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+        }
+
+        /* --- HERO HEADER CONFIGURATION --- */
+        .about-hero {
+            position: relative;
+            background: linear-gradient(135deg, #fff5f5 0%, #fbebeb 100%);
+            padding-top: 140px;
+            padding-bottom: 80px;
+            overflow: hidden;
+        }
+        .blur-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 1;
+            opacity: 0.6;
+        }
+        .blur-1 {
+            width: 300px;
+            height: 300px;
+            background: rgba(220, 53, 69, 0.1);
+            top: -50px;
+            right: -50px;
+        }
+        .blur-2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 193, 7, 0.1);
+            bottom: -100px;
+            left: -100px;
+        }
+        .about-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-light);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+        .about-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--dark-bg);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .about-hero p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            color: #6b7280;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .hero-btn {
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        .btn-primary-custom {
+            background: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.35);
+        }
+        .btn-primary-custom:hover {
+            background: var(--primary-dark);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+        .btn-outline-custom {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        .btn-outline-custom:hover {
+            background: var(--primary-color);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* Image Wrapper Animations */
+        .about-image-wrapper {
+            position: relative;
+            padding: 20px;
+        }
+        .about-main-image {
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            object-fit: cover;
+            height: 480px;
+        }
+        .floating-about-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            bottom: 30px;
+            left: -10px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            animation: floatCard 4s ease-in-out infinite;
+        }
+        .floating-about-card i {
+            font-size: 1.8rem;
+            color: #ffffff;
+            background: var(--primary-color);
+            padding: 12px;
+            border-radius: 12px;
+            line-height: 1;
+        }
+        .floating-about-card h5 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+            color: var(--dark-bg);
+        }
+        .floating-about-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* --- INFRASTRUCTURE OVERVIEW --- */
+        .about-section {
+            padding: 100px 0;
+            background: #ffffff;
+        }
+        .about-image {
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            height: auto;
+            max-height: 450px;
+            object-fit: cover;
+            width: 100%;
+        }
+        .section-title {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-bg);
+            margin-bottom: 15px;
+        }
+        .section-title p {
+            color: #6b7280;
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .about-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .about-feature i {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            background: var(--primary-light);
+            padding: 8px;
+            border-radius: 50%;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .about-feature h5 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-bg);
+            margin-bottom: 6px;
+        }
+        .about-feature p {
+            margin: 0;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        /* --- STATS ACCENTS --- */
+        .about-stats {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1f2937 100%);
+            color: #ffffff;
+        }
+        .stats-box {
+            text-align: center;
+            padding: 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .stats-box h3 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        .stats-box p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #9ca3af;
+        }
+
+        /* --- SPECIALIZATIONS GRID --- */
+        .mission-section {
+            padding: 100px 0;
+            background: #f9fafb;
+        }
+        .mission-card {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid #edf2f7;
+            height: 100%;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        }
+        .mission-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-shadow);
+            border-color: var(--primary-light);
+        }
+        .mission-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .mission-card h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark-bg);
+            margin-bottom: 15px;
+        }
+        .mission-card p {
+            margin: 0;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* --- FOOTER LAYOUT --- */
+        footer {
+            background: var(--dark-bg);
+            color: #9ca3af;
+            padding: 80px 0 30px;
+        }
+        .footer-logo {
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .footer-logo span {
+            color: var(--primary-color);
+        }
+        .footer-text {
+            line-height: 1.7;
+        }
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        .footer-social a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        footer h5 {
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 24px;
+            position: relative;
+        }
+        footer h5::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        .footer-links a:hover {
+            color: #ffffff;
+            padding-left: 6px;
+        }
+        .footer-form {
+            position: relative;
+            display: flex;
+            margin-top: 20px;
+        }
+        .footer-form input {
+            width: 100%;
+            padding: 14px 50px 14px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #ffffff;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+        .footer-form input:focus {
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .footer-form button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            bottom: 5px;
+            border: none;
+            background: var(--primary-color);
+            color: #ffffff;
+            padding: 0 16px;
+            border-radius: 6px;
+            transition: var(--transition-smooth);
+        }
+        .footer-form button:hover {
+            background: var(--primary-dark);
+        }
+        .footer-bottom {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE MEDIA BREAKPOINTS --- */
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                background: #bd2130;
+                padding: 20px;
+                border-radius: 12px;
+                margin-top: 15px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            }
+            .navbar-nav {
+                align-items: stretch !important;
+                text-align: left;
+                width: 100%;
+            }
+            .nav-link {
+                padding: 10px 15px !important;
+                margin-bottom: 5px;
+                display: block;
+            }
+            .nav-btn {
+                display: block;
+                text-align: center;
+                margin-left: 0 !important;
+                margin-top: 10px;
+            }
+            .about-hero {
+                padding-top: 120px;
+                padding-bottom: 60px;
+            }
+            .about-hero h1 {
+                font-size: 2.4rem;
+            }
+            .about-image-wrapper {
+                margin-top: 40px;
+                padding: 0;
+            }
+            .about-main-image {
+                height: 340px;
+            }
+            .floating-about-card {
+                bottom: 15px;
+                left: 10px;
+            }
+            .about-section {
+                padding: 60px 0;
+            }
+            .about-image {
+                margin-bottom: 30px;
+                height: 300px;
+            }
+            .stats-box {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                padding-bottom: 25px;
+            }
+            .col-md-6:last-child .stats-box,
+            .col-sm-6:last-child .stats-box {
+                border-bottom: none;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .about-hero h1 {
+                font-size: 2rem;
+            }
+            .about-hero p {
+                font-size: 1rem;
+                margin-bottom: 25px;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .hero-btn {
+                text-align: center;
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Medicare<span>+</span></a>
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <i class="bi bi-list text-white fs-1"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item ms-lg-3 mt-3 mt-lg-0"><a href="tel:+918127193396" class="nav-btn"><i class="bi bi-telephone-fill"></i> Emergency Call</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="about-hero">
+    <div class="blur-circle blur-1"></div>
+    <div class="blur-circle blur-2"></div>
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6">
+                <div class="about-content">
+                    <div class="hero-badge">
+                        <i class="bi bi-exclamation-triangle-fill"></i> Level-1 Emergency Matrix Operational
+                    </div>
+                    <h1>Immediate Crisis Resuscitation & Trauma Care</h1>
+                    <p>
+                        The Medicare+ Trauma Center operates continuous multi-disciplinary response networks utilizing computerized diagnostics, rapid triage sorting, and surgical intervention corridors engineered for life-saving precision.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#specialties" class="hero-btn btn-primary-custom">Emergency Sectors</a>
+                        <a href="contact.html" class="hero-btn btn-outline-custom">Contact On-Call Surgeon</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="about-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1200&auto=format&fit=crop" class="about-main-image" alt="Emergency Trauma Operations">
+                    <div class="floating-about-card">
+                        <i class="bi bi-lightning-fill"></i>
+                        <div>
+                            <h5>Rapid Response</h5>
+                            <p>Immediate Triage Allocation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=1200&auto=format&fit=crop" class="img-fluid about-image" alt="Critical Care Monitoring Equipment">
+            </div>
+            <div class="col-lg-6 ps-lg-5">
+                <div class="section-title text-start mb-4">
+                    <h2>Advanced Emergency Stabilization Systems</h2>
+                    <p>Our infrastructure coordinates critical resources dynamically, minimizing delays during acute physical trauma conditions.</p>
+                </div>
+                <div class="about-feature">
+                    <i class="bi bi-heart-pulse-fill"></i>
+                    <div>
+                        <h5>Hyper-Accelerated Resuscitation</h5>
+                        <p>Immediate execution of metabolic support protocols, intravascular volume rebalancing, and direct continuous airway controls.</p>
+                    </div>
+                </div>
+                <div class="about-feature">
+                    <i class="bi bi-shield-plus"></i>
+                    <div>
+                        <h5>Polytrauma Surgical Command</h5>
+                        <p>Simultaneous cross-functional intervention capabilities managing complex orthopedic, neural, and visceral structural repairs concurrently.</p>
+                    </div>
+                </div>
+                <div class="about-feature">
+                    <i class="bi bi-activity"></i>
+                    <div>
+                        <h5>Real-Time Diagnostic Feeds</h5>
+                        <p>Point-of-care rapid ultrasonic assessments paired with instantaneous radiological sweeps mapped directly to emergency suites.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about-stats">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="stats-box">
+                    <h3>&lt; 2 Min</h3>
+                    <p>Triage Sorting Delays</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stats-box">
+                    <h3>24/7</h3>
+                    <p>Surgical Team Readiness</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stats-box">
+                    <h3>100%</h3>
+                    <p>Blood Bank Allocation</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stats-box">
+                    <h3>Level-1</h3>
+                    <p>National Rating Status</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mission-section" id="specialties">
+    <div class="container">
+        <div class="section-title">
+            <h2>Trauma Sub-Disciplines</h2>
+            <p>Access our high-intensity medical divisions designed for severe bodily injury management.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="mission-card">
+                    <i class="bi bi-bandaid-fill"></i>
+                    <h4>Acute Surgical Interventions</h4>
+                    <p>Immediate internal bleeding controls, exploratory laproscopic routing, and rapid chest-cavity thoracotomy executions.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="mission-card">
+                    <i class="bi bi-bone"></i>
+                    <h4>Orthopedic Trauma Repairs</h4>
+                    <p>Complex management of open pelvic fracture zones, high-impact bone fragmentation stabilization, and rapid skeletal track bindings.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="mission-card">
+                    <i class="bi bi-cpu-fill"></i>
+                    <h4>Neuro-Trauma Stabilization</h4>
+                    <p>Precision monitoring of sudden intracranial pressure variations, cranial decompression procedures, and emergency spinal cord columns protection.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="mission-card">
+                    <i class="bi bi-fire"></i>
+                    <h4>Advanced Burn Care Management</h4>
+                    <p>Fluid shifting metabolic stabilization pipelines combined with strict isolation units to prevent environmental bacterial pathogens.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="mission-card">
+                    <i class="bi bi-truck"></i>
+                    <h4>Disaster Mobile Support</h4>
+                    <p>Interconnected regional tracking setups designed to direct critical surgical gear configurations right to mass casualty positions.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="mission-card">
+                    <i class="bi bi-heart-pulse"></i>
+                    <h4>Cardiothoracic Emergency Unit</h4>
+                    <p>Rapid vascular bypass stabilization procedures tracking ruptured major arteries and acute structural chest wall damages.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="row gy-5">
+            <div class="col-lg-4">
+                <h3 class="footer-logo">Medicare<span>+</span></h3>
+                <p class="footer-text">
+                    Modern healthcare platform delivering advanced medical solutions, cloud-integrated diagnostics, and world-class patient care systems.
+                </p>
+                <div class="footer-social">
+                    <a href="https://github.com/Nitin765kumar" target="_blank"><i class="bi bi-github"></i></a>
+                    <a href="https://linkedin.com/in/nitinkumar25" target="_blank"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://instagram.com/Nitinkumar812719" target="_blank"><i class="bi bi-instagram"></i></a>
+                    <a href="https://youtube.com/@nitinkumar8487" target="_blank"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <h5>Quick Links</h5>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h5>Departments</h5>
+                <ul class="footer-links">
+                    <li><a href="clinical.html">Clinical Hub</a></li>
+                    <li><a href="trauma.html">Trauma Unit</a></li>
+                    <li><a href="dermatology.html">Dermatology</a></li>
+                    <li><a href="pediatrics.html">Pediatrics</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h5>Newsletter</h5>
+                <p class="footer-text">Subscribe for latest healthcare updates.</p>
+                <form class="footer-form">
+                    <input type="email" placeholder="Enter Email">
+                    <button type="submit"><i class="bi bi-send-fill"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Medicare+ Healthcare Platform. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="assets/js/script.js"></script>
+<script src="assets/js/navbar.js"></script>
+<script src="assets/js/animation.js"></script>
+<script src="assets/js/counter.js"></script>
+
+</body>
+</html>
